@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
+
 import { removeContact } from '../../redux/contactsReducer';
+import { getContacts, getFiltering } from '../../redux/selectors';
+
 import css from './Contact.module.css';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(store => store.phoneBook.contacts);
-  const filterData = useSelector(store => store.phoneBook.filterData);
+  const contacts = useSelector(getContacts);
+  const filterData = useSelector(getFiltering);
 
   const searchData = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filterData.toLowerCase())

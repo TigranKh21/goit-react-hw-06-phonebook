@@ -1,11 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsReducer';
+
 import { nanoid } from 'nanoid';
+
+import { getContacts } from '../../redux/selectors';
+
 import css from './Contact.module.css';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(store => store.phoneBook.contacts);
+  const contacts = useSelector(getContacts);
   const handleSubmit = e => {
     e.preventDefault();
     const name = e.currentTarget.elements.name.value;
@@ -29,7 +33,6 @@ export const ContactForm = () => {
     }
 
     const newContact = { ...formData, id: 'id-' + nanoid(2) };
-    console.log(newContact);
     const action = addContact(newContact);
     dispatch(action);
   };
